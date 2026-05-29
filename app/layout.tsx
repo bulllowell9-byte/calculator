@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import type { ReactNode } from "react";
+
+import { SiteFooter } from "@/components/site/footer";
+import { SiteHeader } from "@/components/site/header";
+import { siteConfig } from "@/lib/site";
 
 import "./globals.css";
 
@@ -20,33 +25,34 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://refinance-calculator.vercel.app"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Refinance Calculator - Estimate Your Mortgage Savings",
-    template: "%s | Refinance Calculator"
+    default: "Refinance Calculator - Estimate Mortgage Savings | RefiWise",
+    template: "%s | RefiWise"
   },
-  description:
-    "Use this mortgage refinance calculator to estimate monthly payments, interest savings, closing costs, and your refinance break-even point.",
-  applicationName: "Refinance Calculator",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
   keywords: [
     "refinance calculator",
     "mortgage refinance calculator",
     "refinance savings calculator",
-    "refinance payment calculator"
+    "refinance payment calculator",
+    "mortgage calculator",
+    "amortization schedule",
+    "break-even refinance calculator"
   ],
   openGraph: {
     type: "website",
     url: "/",
-    title: "Refinance Calculator - Estimate Your Mortgage Savings",
-    description:
-      "Calculate monthly payments, interest savings, and break-even timelines for refinancing your mortgage.",
-    siteName: "Refinance Calculator"
+    title: "Refinance Calculator - Estimate Mortgage Savings | RefiWise",
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    locale: "en_US"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Refinance Calculator - Estimate Your Mortgage Savings",
-    description:
-      "Calculate monthly payments, interest savings, and break-even timelines for refinancing your mortgage."
+    title: "Refinance Calculator - Estimate Mortgage Savings | RefiWise",
+    description: siteConfig.description
   },
   alternates: {
     canonical: "/"
@@ -60,7 +66,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3566093762013563"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

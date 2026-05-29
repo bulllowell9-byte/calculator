@@ -114,7 +114,7 @@ export function RefinanceCalculator() {
   return (
     <section id="calculator" className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px]">
       <div className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
           <StatCard
             label="New monthly payment"
             value={formatCurrency(results.newMonthlyPayment)}
@@ -131,13 +131,18 @@ export function RefinanceCalculator() {
             helper="Time to recover closing costs"
           />
           <StatCard
+            label="Interest savings"
+            value={formatCurrency(results.totalInterestSavings)}
+            helper="Current interest minus new interest"
+          />
+          <StatCard
             label="Lifetime savings"
             value={formatCurrency(results.totalLifetimeSavings)}
             helper="Interest savings minus closing costs"
           />
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-soft dark:border-slate-800 dark:bg-slate-950">
+        <div id="amortization" className="rounded-lg border border-slate-200 bg-white p-5 shadow-soft dark:border-slate-800 dark:bg-slate-950">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-xl font-bold text-slate-950 dark:text-white">Payment and interest comparison</h2>
@@ -173,7 +178,7 @@ export function RefinanceCalculator() {
             <button
               type="button"
               onClick={downloadCsv}
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-finance-700 dark:bg-white dark:text-slate-950 dark:hover:bg-finance-100"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-finance-700 focus:outline-none focus:ring-2 focus:ring-finance-500 focus:ring-offset-2 dark:bg-white dark:text-slate-950 dark:hover:bg-finance-100"
             >
               <Download className="h-4 w-4" />
               CSV
